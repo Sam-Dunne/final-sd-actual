@@ -2,34 +2,39 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
+import { apiService } from '../utils/api-services';
+import { IBookFull } from '../../interfaces';
 
 /* HOOK REACT EXAMPLE */
 const Details = (props: DetailsProps) => {
     const history = useHistory();
-    const {id} = useParams<{id: string}>();
-	const [x, setx] = useState<string>('');
-    const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
+    const { id } = useParams<{ id: string }>();
+    const [book, setBook] = useState<IBookFull>(null);
 
-	useEffect(() => {
-	
-	}, []);
 
-    const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-    };
+    useEffect(() => {
+        apiService(`/api/books/${id}`)
+            .then(book => setBook(book))
+    }, [id]);
 
-	return (
-		<main className="container my-5">
-			<h1 className="text-primary text-center">Details</h1>
-            <input value={x} onChange={handleSetX} placeholder='placholder'/>
-            <br/>
-            <button onClick={handleSubmit}>Submit</button>
-            <br/>
-            <Link to='/'>Link</Link>
-		</main>
-	);
+    return (
+        <main className="container my-5">
+            <h1 className="text-primary text-center">Details</h1>
+                <div className="border">
+                    <h4>{book?.title}</h4>
+                    <h4>{book?.author}</h4>
+                    <h4>{book?.name}</h4>
+                    <h4>{`$${book?.price}`}</h4>
+                    <h4>{book?._created}</h4>
+                    <br />
+                    <Link to={`/edit/${book?.id}`}>To Edit Book</Link>
+                    <br/>
+                    <Link to={`/books`}>Back to Books</Link>
+                </div>
+        </main>
+    );
 };
 
-interface DetailsProps {}
+interface DetailsProps { }
 
 export default Details;
