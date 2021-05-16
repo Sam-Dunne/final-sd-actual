@@ -25,7 +25,7 @@ const Books = (props: BooksProps) => {
         <main className="container my-5">
             <h1 className="text-primary text-center">Books</h1>
             {books?.map(book => (
-                <div className="border">
+                <div key={book.id}className="border">
                     <h4>{book.title}</h4>
                     <h4>{book.author}</h4>
                     <h4>{book.name}</h4>

@@ -33,6 +33,14 @@ const Edit = (props: EditProps) => {
         })
     };
 
+    const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        apiService(`/api/books/${id}`, 'DELETE')
+        .then(res => {
+            history.push(`/books`)
+        })
+    };
+
 	return (
 		<main className="container my-5">
 			<h1 className="text-primary text-center">Edit</h1>
@@ -40,7 +48,9 @@ const Edit = (props: EditProps) => {
             <input value={author} onChange={handleSetAuthor} />
             <input value={price} onChange={handleSetPrice} />
             <br/>
-            <button onClick={handleSubmit}>Submit</button>
+            <button onClick={handleSubmit}>Submit Edit</button>
+            <br/>
+            <button onClick={handleDelete}>Delete Book</button>
             <br/>
             <Link to='/books'>Back to Books</Link>
 		</main>

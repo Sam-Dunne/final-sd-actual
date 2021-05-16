@@ -24,7 +24,7 @@ router.get('/:id', async (req, res, next) => {
     }
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', authenticate('jwt'), async (req, res, next) => {
     const newBook = req.body;
     try {
         const results = await db.books.insert(newBook)
@@ -34,7 +34,7 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', authenticate('jwt'), async (req, res, next) => {
     const id = req.params.id;
     const updatedBook = req.body;
     try {
@@ -45,7 +45,7 @@ router.put('/:id', async (req, res, next) => {
     }
 });
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', authenticate('jwt'), async (req, res, next) => {
     const id = req.params.id;
     
     try {

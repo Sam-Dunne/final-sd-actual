@@ -27,6 +27,10 @@ const Create = (props: CreateProps) => {
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
+        apiService(`/api/books`, 'POST', {title, author, price, categoryid})
+        .then(res => {
+            history.push(`/details/${res.insertId}`)
+        })
     };
 
 	return (
@@ -47,7 +51,9 @@ const Create = (props: CreateProps) => {
             <br/>
             <button onClick={handleSubmit}>Submit</button>
             <br/>
-            <Link to='/'>Link</Link>
+            <Link to='/'>Home</Link>
+            <br/>
+            <Link to='/books'>To Books</Link>
 		</main>
 	);
 };

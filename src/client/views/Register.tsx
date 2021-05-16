@@ -2,30 +2,41 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
+import { apiService } from '../utils/api-services';
 
 /* HOOK REACT EXAMPLE */
 const Register = (props: RegisterProps) => {
     const history = useHistory();
-    const {id} = useParams<{id: string}>();
-	const [x, setx] = useState<string>('');
-    const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
-
-	useEffect(() => {
-	
-	}, []);
+    
+	const [name, setName] = useState<string>('');
+    const handleSetName = (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value);
+	const [email, setEmail] = useState<string>('');
+    const handleSetEmail = (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
+	const [password, setPassword] = useState<string>('');
+    const handleSetPassword = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
+        apiService(`/auth/register`, 'POST', {name, email, password})
+        .then(res => {
+            localStorage.setItem('token', res.token);
+            alert(`Thanks for joining, ${res.name}`)
+            history.push('/books')
+        })
     };
 
 	return (
 		<main className="container my-5">
-			<h1 className="text-primary text-center">Register</h1>
-            <input value={x} onChange={handleSetX} placeholder='placholder'/>
+			<h1 className="text-primary text-center">Login</h1>
+            <input value={name} onChange={handleSetName} placeholder='Your Email'/>
+            <input value={email} onChange={handleSetEmail} placeholder='Your Email'/>
+            <input value={password} onChange={handleSetPassword} placeholder='Your Password'/>
             <br/>
             <button onClick={handleSubmit}>Submit</button>
             <br/>
-            <Link to='/'>Link</Link>
+            <Link to='/books'>To Books</Link>
+            <br/>
+            <Link to='/register'>Not a Member...Register here</Link>
 		</main>
 	);
 };
