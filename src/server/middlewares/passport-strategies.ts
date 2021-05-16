@@ -25,6 +25,7 @@ export function configurePassport(app: Application) {
         try {
             const [userFound] = await db.users.find('email', email);
             if (userFound && compareHash(password, userFound.password)) {
+                delete userFound.password;
                 done(null, userFound);
             } else {
                 done(null, false);
