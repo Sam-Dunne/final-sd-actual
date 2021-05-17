@@ -7,10 +7,10 @@ import { apiService } from '../utils/api-services';
 /* HOOK REACT EXAMPLE */
 const Login = (props: LoginProps) => {
     const history = useHistory();
-    
-	const [email, setEmail] = useState<string>('');
+
+    const [email, setEmail] = useState<string>('');
     const handleSetEmail = (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
-	const [password, setPassword] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
     const handleSetPassword = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -19,29 +19,29 @@ const Login = (props: LoginProps) => {
             alert(`Required Fields`);
             return;
         }
-        apiService(`/auth/login`, 'POST', {email, password})
-        .then(res => {
-            localStorage.setItem('token', res.token);
-            alert(`Welcome back, ${res.name}`)
-            history.push('/books')
-        })
+        apiService(`/auth/login`, 'POST', { email, password })
+            .then(res => {
+                localStorage.setItem('token', res.token);
+                alert(`Welcome back, ${res.name}`)
+                history.push('/books')
+            })
     };
 
-	return (
-		<main className="container my-5">
-			<h1 className="text-primary text-center">Login</h1>
-            <input value={email} onChange={handleSetEmail} placeholder='Your Email'/>
-            <input value={password} onChange={handleSetPassword} placeholder='Your Password'/>
-            <br/>
+    return (
+        <main className="container my-5">
+            <h1 className="text-primary text-center">Login</h1>
+            <input value={email} onChange={handleSetEmail} placeholder='Your Email' />
+            <input value={password} onChange={handleSetPassword} placeholder='Your Password' />
+            <br />
             <button onClick={handleSubmit}>Submit</button>
-            <br/>
+            <br />
             <Link to='/books'>To Books</Link>
-            <br/>
+            <br />
             <Link to='/register'>Not a Member...Register here</Link>
-		</main>
-	);
+        </main>
+    );
 };
 
-interface LoginProps {}
+interface LoginProps { }
 
 export default Login;

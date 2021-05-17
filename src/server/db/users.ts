@@ -1,5 +1,5 @@
 import { Query } from './index';
-import {IBooks, ICategories, IUsers} from '../../interfaces';
+import { IUsers } from '../../interfaces';
 
 const all = () => Query<IUsers[]>('SELECT users.id, users.email, users.role, users._created, users.name FROM Users');
 

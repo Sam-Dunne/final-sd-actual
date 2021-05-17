@@ -1,4 +1,4 @@
-import {Router} from 'express';
+import { Router } from 'express';
 import db from '../../db';
 import { authenticate } from 'passport';
 
@@ -47,7 +47,7 @@ router.put('/:id', authenticate('jwt'), async (req, res, next) => {
 
 router.delete('/:id', authenticate('jwt'), async (req, res, next) => {
     const id = req.params.id;
-    
+
     try {
         const results = await db.books.nuke(id)
         res.json(results);

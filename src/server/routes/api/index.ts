@@ -1,4 +1,4 @@
-import {Router} from 'express';
+import { Router } from 'express';
 import booksRouter from './books';
 import categoriesRouter from './categories';
 import usersRouter from './users';

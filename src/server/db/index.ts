@@ -1,5 +1,5 @@
 import * as mysql from 'mysql';
-import { MySQLResponse} from '../../interfaces'
+import { MySQLResponse } from '../../interfaces'
 
 const pool = mysql.createPool({
     host: 'localhost',
@@ -8,15 +8,15 @@ const pool = mysql.createPool({
     password: 'finalexam',
 });
 
-export const Query = <T=MySQLResponse>(queries: string, values?: any) => {
+export const Query = <T = MySQLResponse>(queries: string, values?: any) => {
     return new Promise<T>((resolve, reject) => {
-       pool.query(queries, values, (err, results) => {
-           if (err) {
-               reject(err);
-           } else {
-               resolve(results)
-           }
-       })
+        pool.query(queries, values, (err, results) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(results)
+            }
+        })
     })
 };
 

@@ -1,5 +1,5 @@
 import { Query } from './index';
-import { IBooks, ICategories, IUsers } from '../../interfaces';
+import { IBooks, ICategories } from '../../interfaces';
 
 const all = () => Query<(IBooks & ICategories)[]>('SELECT books.id, books.categoryid, books.title, books.author, books.price, books._created, categories.name FROM books LEFT JOIN categories ON books.categoryid = categories.id');
 const one = (id: string) => Query<(IBooks & ICategories)[]>('SELECT books.id, books.categoryid, books.title, books.author, books.price, books._created, categories.name FROM books LEFT JOIN categories ON books.categoryid = categories.id WHERE books.id = ?', [id]);

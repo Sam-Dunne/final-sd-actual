@@ -20,17 +20,17 @@ const Details = (props: DetailsProps) => {
     return (
         <main className="container my-5">
             <h1 className="text-primary text-center">Details</h1>
-                <div className="border">
-                    <h4>{`Title: ${book?.title}`}</h4>
-                    <h4>{`By: ${book?.author}`}</h4>
-                    <h4>{`Category: ${book?.name}`}</h4>
-                    <h4>{`$${book?.price}`}</h4>
-                    <h4>{book?._created}</h4>
-                    <br />
-                    <Link to={`/edit/${book?.id}`}>To Edit Book</Link>
-                    <br/>
-                    <Link to={`/books`}>Back to Books</Link>
-                </div>
+            <div className="border">
+                <h4>{`Title: ${book?.title}`}</h4>
+                <h4>{`By: ${book?.author}`}</h4>
+                <h4>{`Category: ${book?.name}`}</h4>
+                <h4>{`$${book?.price}`}</h4>
+                <h4>{book?._created}</h4>
+                <br />
+                <Link to={`/edit/${book?.id}`}>To Edit Book</Link>
+                <br />
+                <Link to={`/books`}>Back to Books</Link>
+            </div>
         </main>
     );
 };

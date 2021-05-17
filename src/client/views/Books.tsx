@@ -17,15 +17,11 @@ const Books = (props: BooksProps) => {
             .then(books => setBooks(books))
     }, []);
 
-    const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-    };
-
     return (
         <main className="container my-5">
             <h1 className="text-primary text-center">Books</h1>
             {books?.map(book => (
-                <div key={book.id}className="border">
+                <div key={book.id} className="border">
                     <h4>{`Title: ${book.title}`}</h4>
                     <h4>{`By: ${book.author}`}</h4>
                     <h4>{`Category: ${book.name}`}</h4>

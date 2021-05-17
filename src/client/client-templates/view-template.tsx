@@ -6,30 +6,30 @@ import { Link } from 'react-router-dom';
 /* HOOK REACT EXAMPLE */
 const App = (props: AppProps) => {
     const history = useHistory();
-    const {id} = useParams<{id: string}>();
-	const [x, setx] = useState<string>('');
+    const { id } = useParams<{ id: string }>();
+    const [x, setx] = useState<string>('');
     const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
 
-	useEffect(() => {
-	
-	}, []);
+    useEffect(() => {
+
+    }, []);
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
     };
 
-	return (
-		<main className="container my-5">
-			<h1 className="text-primary text-center">App</h1>
-            <input value={x} onChange={handleSetX} placeholder='placholder'/>
-            <br/>
+    return (
+        <main className="container my-5">
+            <h1 className="text-primary text-center">App</h1>
+            <input value={x} onChange={handleSetX} placeholder='placholder' />
+            <br />
             <button onClick={handleSubmit}>Submit</button>
-            <br/>
+            <br />
             <Link to='/'>Link</Link>
-		</main>
-	);
+        </main>
+    );
 };
 
-interface AppProps {}
+interface AppProps { }
 
 export default App;

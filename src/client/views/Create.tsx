@@ -8,65 +8,65 @@ import { apiService } from '../utils/api-services';
 /* HOOK REACT EXAMPLE */
 const Create = (props: CreateProps) => {
     const history = useHistory();
-    const {id} = useParams<{id: string}>();
-	const [categories, setCategories] = useState<ICategories[]>([]);
-    
-	const [categoryid, setCategoryid] = useState<string>('0');
+    const { id } = useParams<{ id: string }>();
+    const [categories, setCategories] = useState<ICategories[]>([]);
+
+    const [categoryid, setCategoryid] = useState<string>('0');
     const handleSetCategoryid = (e: React.ChangeEvent<HTMLSelectElement>) => setCategoryid(e.target.value);
-	const [title, setTitle] = useState<string>('');
+    const [title, setTitle] = useState<string>('');
     const handleSetTitle = (e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value);
-	const [author, setAuthor] = useState<string>('');
+    const [author, setAuthor] = useState<string>('');
     const handleSetAuthor = (e: React.ChangeEvent<HTMLInputElement>) => setAuthor(e.target.value);
-	const [price, setPrice] = useState<string>('');
+    const [price, setPrice] = useState<string>('');
     const handleSetPrice = (e: React.ChangeEvent<HTMLInputElement>) => setPrice(e.target.value);
 
-	useEffect(() => {
+    useEffect(() => {
         apiService(`/api/categories`)
-        .then(categories => setCategories(categories))
-	}, []);
+            .then(categories => setCategories(categories))
+    }, []);
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        console.log(price.length)
+
         if (categoryid === '0' || title.length === 0 || author.length === 0 || title.length > 100 || author.length > 100) {
             alert(`All fields are Required`);
             return;
         }
-        if ( price.length > 5 ) {
+        if (price.length > 5) {
             alert(`Max value: 99.99`);
             return;
         }
-        apiService(`/api/books`, 'POST', {title, author, price, categoryid})
-        .then(res => {
-            // history.push(`/details/${res.insertId}`);
-        })
+        apiService(`/api/books`, 'POST', { title, author, price, categoryid })
+            .then(res => {
+                // history.push(`/details/${res.insertId}`);
+            })
     };
 
-	return (
-		<main className="container my-5">
-			<h1 className="text-primary text-center">Create</h1>
+    return (
+        <main className="container my-5">
+            <h1 className="text-primary text-center">Create</h1>
 
             <select className='form-control' value={categoryid} onChange={handleSetCategoryid}>
                 <option value="0">Select a Category</option>
                 {categories?.map(category => (
                     <option key={`category-option-${category.id}`} value={category.id}>{category.name}</option>
-                    
+
                 ))}
             </select>
 
-            <input value={title} onChange={handleSetTitle} placeholder='Title'/>
-            <input value={author} onChange={handleSetAuthor} placeholder='Author'/>
-            <input value={price} onChange={handleSetPrice} placeholder='Price'/>
-            <br/>
+            <input value={title} onChange={handleSetTitle} placeholder='Title' />
+            <input value={author} onChange={handleSetAuthor} placeholder='Author' />
+            <input value={price} onChange={handleSetPrice} placeholder='Price' />
+            <br />
             <button onClick={handleSubmit}>Submit</button>
-            <br/>
+            <br />
             <Link to='/'>Home</Link>
-            <br/>
+            <br />
             <Link to='/books'>To Books</Link>
-		</main>
-	);
+        </main>
+    );
 };
 
-interface CreateProps {}
+interface CreateProps { }
 
 export default Create;

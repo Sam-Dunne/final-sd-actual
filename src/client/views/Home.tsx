@@ -6,19 +6,19 @@ import { Link } from 'react-router-dom';
 /* HOOK REACT EXAMPLE */
 const Home = (props: HomeProps) => {
 
-	return (
-		<main className="container my-5">
-			<h1 className="text-primary text-center">Home</h1>
+    return (
+        <main className="container my-5">
+            <h1 className="text-primary text-center">Home</h1>
             <h4>It's a Landing page, yay!</h4>
             <Link to='/books'>To Books</Link>
-            <br/>
+            <br />
             <Link to='/login'>Login</Link>
-            <br/>
+            <br />
             <Link to='/register'>Register</Link>
-		</main>
-	);
+        </main>
+    );
 };
 
-interface HomeProps {}
+interface HomeProps { }
 
 export default Home;
