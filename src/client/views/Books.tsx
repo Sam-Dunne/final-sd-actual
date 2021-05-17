@@ -26,9 +26,9 @@ const Books = (props: BooksProps) => {
             <h1 className="text-primary text-center">Books</h1>
             {books?.map(book => (
                 <div key={book.id}className="border">
-                    <h4>{book.title}</h4>
-                    <h4>{book.author}</h4>
-                    <h4>{book.name}</h4>
+                    <h4>{`Title: ${book.title}`}</h4>
+                    <h4>{`By: ${book.author}`}</h4>
+                    <h4>{`Category: ${book.name}`}</h4>
                     <br />
                     <Link to={`/details/${book.id}`}>To Book Details</Link>
                 </div>

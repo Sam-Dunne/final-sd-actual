@@ -21,9 +21,9 @@ const Details = (props: DetailsProps) => {
         <main className="container my-5">
             <h1 className="text-primary text-center">Details</h1>
                 <div className="border">
-                    <h4>{book?.title}</h4>
-                    <h4>{book?.author}</h4>
-                    <h4>{book?.name}</h4>
+                    <h4>{`Title: ${book?.title}`}</h4>
+                    <h4>{`By: ${book?.author}`}</h4>
+                    <h4>{`Category: ${book?.name}`}</h4>
                     <h4>{`$${book?.price}`}</h4>
                     <h4>{book?._created}</h4>
                     <br />

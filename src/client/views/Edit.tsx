@@ -27,6 +27,14 @@ const Edit = (props: EditProps) => {
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
+        if (title.length === 0 || author.length === 0 || price.length === 0) {
+            alert(`All fields are required`);
+            return;
+        }
+        if ( price.length > 5 ) {
+            alert(`Max value: 99.99`);
+            return;
+        }
         apiService(`/api/books/${id}`, 'PUT', {title, author, price})
         .then(res => {
             history.push(`/details/${id}`)
@@ -44,9 +52,15 @@ const Edit = (props: EditProps) => {
 	return (
 		<main className="container my-5">
 			<h1 className="text-primary text-center">Edit</h1>
+            <label >Title:</label>
             <input value={title} onChange={handleSetTitle} />
+            <br/>
+            <label >Author:</label>
             <input value={author} onChange={handleSetAuthor} />
+            <br/>
+            <label >Price:</label>
             <input value={price} onChange={handleSetPrice} />
+            <br/>
             <br/>
             <button onClick={handleSubmit}>Submit Edit</button>
             <br/>

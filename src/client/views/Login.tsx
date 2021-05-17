@@ -15,6 +15,10 @@ const Login = (props: LoginProps) => {
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
+        if (email.length === 0 || password.length === 0) {
+            alert(`Required Fields`);
+            return;
+        }
         apiService(`/auth/login`, 'POST', {email, password})
         .then(res => {
             localStorage.setItem('token', res.token);

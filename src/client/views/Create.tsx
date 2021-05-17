@@ -27,9 +27,18 @@ const Create = (props: CreateProps) => {
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
+        console.log(price.length)
+        if (categoryid === '0' || title.length === 0 || author.length === 0 || title.length > 100 || author.length > 100) {
+            alert(`All fields are Required`);
+            return;
+        }
+        if ( price.length > 5 ) {
+            alert(`Max value: 99.99`);
+            return;
+        }
         apiService(`/api/books`, 'POST', {title, author, price, categoryid})
         .then(res => {
-            history.push(`/details/${res.insertId}`)
+            // history.push(`/details/${res.insertId}`);
         })
     };
 

@@ -4,6 +4,7 @@ import { Route, Redirect } from 'react-router-dom';
 const PrivateRoute = (props: PrivateRouteProps) => {
     const token = localStorage.getItem('token');
     if (!token) {
+        alert(`Redirecting: Login or Register to access this feature`);
         return (
             <Redirect to='/login' />
         )

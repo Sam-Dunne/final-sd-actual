@@ -17,6 +17,10 @@ const Register = (props: RegisterProps) => {
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
+        if (name.length === 0 || email.length === 0 || password.length === 0 || name.length > 60 || email.length > 60 || password.length > 60 || password.length < 6) {
+            alert(`Required Fields`);
+            return;
+        }
         apiService(`/auth/register`, 'POST', {name, email, password})
         .then(res => {
             localStorage.setItem('token', res.token);
@@ -27,7 +31,7 @@ const Register = (props: RegisterProps) => {
 
 	return (
 		<main className="container my-5">
-			<h1 className="text-primary text-center">Login</h1>
+			<h1 className="text-primary text-center">Register</h1>
             <input value={name} onChange={handleSetName} placeholder='Your Email'/>
             <input value={email} onChange={handleSetEmail} placeholder='Your Email'/>
             <input value={password} onChange={handleSetPassword} placeholder='Your Password'/>
